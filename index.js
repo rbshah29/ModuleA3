@@ -67,7 +67,7 @@ app.get('/list-products', async (req, res) => {
   
       const products = rows.map(row => ({
         name: row.name,
-        price: row.price,
+        price: parseFloat(row.price).toFixed(0), // Remove decimal and convert to string
         availability: Boolean(row.availability),
       }));
   
@@ -76,5 +76,6 @@ app.get('/list-products', async (req, res) => {
       res.status(400).send(err.message);
     }
   });
+  
 
 app.listen(80, () => console.log('Listening on port 80'));
